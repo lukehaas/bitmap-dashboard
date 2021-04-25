@@ -33,7 +33,7 @@ if (nodeEnv === 'development') {
   //   })
   // );
 } else {
-  app.use(compression());
+  // app.use(compression());
   app.use([/(.*)\.html$/, '/'], express.static('client/dist'));
 }
 
