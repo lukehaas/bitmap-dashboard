@@ -8,7 +8,7 @@ import { Today } from 'components/Today';
 import { News } from 'components/News';
 
 const client = new ApolloClient({
-  uri: 'http://localhost:3000/graphql',
+  uri: `${process.env.HOST}/graphql`,
   cache: new InMemoryCache(),
 });
 // transform: rotate(90deg);

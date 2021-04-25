@@ -4,6 +4,7 @@ function main(config) {
   sh.echo('--- Starting development environment');
 
   sh.env['NODE_ENV'] = config.nodeEnv;
+  sh.env['HOST'] = config.host;
 
   const commandParts = [
     'npx',
@@ -17,6 +18,7 @@ function main(config) {
 
 const thisConfig = {
   nodeEnv: 'development',
+  host: 'http://localhost:3000',
 };
 
 main(thisConfig);
