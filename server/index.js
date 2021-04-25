@@ -13,7 +13,7 @@ const { getImage } = require('./modules/scraper');
 const server = new ApolloServer({ typeDefs, resolvers });
 
 const app = express();
-const port = 3000;
+const port = parseInt(process.env.PORT, 10) || 3000;
 const nodeEnv = process.env.NODE_ENV;
 
 server.applyMiddleware({ app });
@@ -43,10 +43,11 @@ app.get('/', (req, res) => {
 });
 
 app.get('/image', (req, res) => {
-  getImage()
+  const host = req.get('host');
+  const url = `${req.protocol}://${host}`;
+  getImage(url)
     .then(image => {
       res.header('Content-Type', 'image/bmp');
-      console.log('image', image);
       res.end(image);
     })
     .catch(err => res.status(500).send(err));
