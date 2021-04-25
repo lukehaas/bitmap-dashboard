@@ -43,9 +43,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/image', (req, res) => {
-  const host = req.get('host');
-  const url = `${req.protocol}://${host}`;
-  getImage(url)
+  getImage()
     .then(image => {
       res.header('Content-Type', 'image/bmp');
       res.end(image);

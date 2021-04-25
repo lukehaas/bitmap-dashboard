@@ -1,9 +1,9 @@
 const puppeteer = require('puppeteer');
 
-const getImage = async url => {
+const getImage = async () => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
-  await page.goto(url, {
+  await page.goto(process.env.HOST, {
     waitUntil: 'networkidle2',
   });
   await page.setViewport({ width: 880, height: 528, isLandscape: true });
