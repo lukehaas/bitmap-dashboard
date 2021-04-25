@@ -1,0 +1,53 @@
+{
+  "name": "bitmap-dashboard",
+  "version": "1.0.0",
+  "description": "React app for dashboard",
+  "main": "index.js",
+  "scripts": {
+    "start": "node scripts/startDev",
+    "build": "webpack --config webpack.build.config.js",
+    "preserve": "npm run build",
+    "serve": "node server/index.js",
+    "lint": "eslint"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@apollo/client": "3.3.14",
+    "@babel/core": "7.13.8",
+    "@babel/eslint-parser": "7.13.8",
+    "@babel/preset-env": "7.13.9",
+    "@babel/preset-react": "7.12.13",
+    "@emotion/core": "11.0.0",
+    "@emotion/react": "11.1.5",
+    "@emotion/styled": "11.1.5",
+    "babel-loader": "8.2.2",
+    "clean-webpack-plugin": "3.0.0",
+    "eslint": "7.21.0",
+    "html-webpack-plugin": "5.3.0",
+    "lodash-es": "4.17.21",
+    "nodemon": "2.0.7",
+    "optimism": "0.15.0",
+    "prettier": "2.2.1",
+    "prop-types": "15.7.2",
+    "query-string": "6.14.1",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "shelljs": "0.8.4",
+    "ts-invariant": "0.7.3",
+    "webpack": "5.24.4",
+    "webpack-cli": "4.5.0",
+    "webpack-dev-middleware": "4.1.0",
+    "webpack-hot-middleware": "2.25.0"
+  },
+  "dependencies": {
+    "apollo-server-express": "2.22.2",
+    "compression": "1.7.4",
+    "dotenv": "8.2.0",
+    "express": "4.17.1",
+    "graphql": "15.5.0",
+    "isomorphic-fetch": "3.0.0",
+    "puppeteer": "9.0.0"
+  }
+}
