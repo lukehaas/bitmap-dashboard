@@ -4,7 +4,6 @@
   "description": "React app for dashboard",
   "main": "index.js",
   "scripts": {
-    "prestart": "npm run build",
     "start": "node server/index.js",
     "dev": "node scripts/startDev",
     "build": "webpack --config webpack.build.config.js",
