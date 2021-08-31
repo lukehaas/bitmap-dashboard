@@ -47,6 +47,7 @@
     "express": "4.17.1",
     "graphql": "15.5.0",
     "isomorphic-fetch": "3.0.0",
+    "jimp": "0.16.1",
     "puppeteer": "9.0.0"
   }
 }

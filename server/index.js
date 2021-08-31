@@ -5,6 +5,7 @@ const express = require('express');
 const path = require('path');
 const compression = require('compression');
 const { ApolloServer } = require('apollo-server-express');
+const Jimp = require('jimp');
 
 const resolvers = require('./modules/resolvers');
 const typeDefs = require('./modules/typeDefs');
@@ -44,10 +45,11 @@ app.get('/', (req, res) => {
 
 app.get('/image', (req, res) => {
   getImage()
+    .then(image => Jimp.read(image))
+    .then(image => image.greyscale().getBufferAsync(Jimp.MIME_BMP))
     .then(image => {
       res.header('Content-Type', 'image/bmp');
       res.end(image);
-      // res.sendFile(path.join(__dirname + '/../woof.bmp'));
     })
     .catch(err => res.status(500).send(err));
 });
