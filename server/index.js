@@ -45,6 +45,11 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname + '/../client/dist/index.html'));
 });
 
+app.get('/test', (req, res) => {
+  res.header('Content-Type', 'image/bmp');
+  res.sendFile(path.join(__dirname + '/../woof.bmp'));
+});
+
 app.get('/image', (req, res) => {
   getImage()
     .then(image => Jimp.read(image))
