@@ -37,8 +37,9 @@ if (nodeEnv === 'development') {
   // );
 } else {
   // app.use(compression());
-  app.use([/(.*)\.html$/, '/'], express.static('client/dist'));
+  // app.use([/(.*)\.html$/, '/'], express.static('client/dist'));
 }
+app.use(express.static('public'));
 
 app.get('/', (req, res) => {
   res.header('Content-Type', 'text/html');
@@ -46,7 +47,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/test', (req, res) => {
-  res.sendFile(path.join(__dirname + '/../woof.bmp'));
+  res.sendFile(path.join(__dirname + '/../public/woof.bmp'));
 });
 
 app.get('/image', (req, res) => {
