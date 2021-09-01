@@ -46,7 +46,6 @@ app.get('/', (req, res) => {
 });
 
 app.get('/test', (req, res) => {
-  res.header('Content-Type', 'image/bmp');
   res.sendFile(path.join(__dirname + '/../woof.bmp'));
 });
 
