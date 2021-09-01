@@ -50,7 +50,7 @@ app.get('/image', (req, res) => {
     .then(image => Jimp.read(image))
     .then(image => image.greyscale().getBufferAsync(Jimp.MIME_BMP))
     .then(image => {
-      res.header('Content-Type', 'image/bmp');
+      // res.header('Content-Type', 'image/bmp');
       res.end(image, 'binary');
     })
     .catch(err => res.status(500).send(err));
