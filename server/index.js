@@ -21,6 +21,10 @@ const nodeEnv = process.env.NODE_ENV;
 
 server.applyMiddleware({ app });
 
+app.use(function (req, res, next) {
+  res.set('Cache-control', 'max-age=300');
+});
+
 if (nodeEnv === 'development') {
   const webpack = require('webpack');
   const webpackDevMiddleware = require('webpack-dev-middleware');
