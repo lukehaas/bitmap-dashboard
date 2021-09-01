@@ -6,6 +6,7 @@ const path = require('path');
 const compression = require('compression');
 const { ApolloServer } = require('apollo-server-express');
 const Jimp = require('jimp');
+const helmet = require('helmet');
 
 const resolvers = require('./modules/resolvers');
 const typeDefs = require('./modules/typeDefs');
@@ -14,6 +15,7 @@ const { getImage } = require('./modules/scraper');
 const server = new ApolloServer({ typeDefs, resolvers });
 
 const app = express();
+app.use(helmet());
 const port = parseInt(process.env.PORT, 10) || 3000;
 const nodeEnv = process.env.NODE_ENV;
 
@@ -49,7 +51,7 @@ app.get('/image', (req, res) => {
     .then(image => image.greyscale().getBufferAsync(Jimp.MIME_BMP))
     .then(image => {
       res.header('Content-Type', 'image/bmp');
-      res.end(image);
+      res.end(image, 'binary');
     })
     .catch(err => res.status(500).send(err));
 });
