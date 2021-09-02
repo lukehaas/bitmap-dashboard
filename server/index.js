@@ -16,6 +16,11 @@ const server = new ApolloServer({ typeDefs, resolvers });
 
 const app = express();
 app.use(helmet());
+app.use(function (req, res, next) {
+  res.setHeader('Connection', 'Keep-Alive');
+  res.setHeader('Keep-Alive', 'timeout=30, max=1000');
+  next();
+});
 
 const port = parseInt(process.env.PORT, 10) || 3000;
 const nodeEnv = process.env.NODE_ENV;
