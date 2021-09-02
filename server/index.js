@@ -62,6 +62,10 @@ app.get('/image', (req, res) => {
     .catch(err => res.status(500).send(err));
 });
 
-app.listen({ port }, () => {
+const expressServer = app.listen({ port }, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
+
+expressServer.keepAliveTimeout = 30000;
+// Ensure all inactive connections are terminated by the ALB, by setting this a few seconds higher than the ALB idle timeout
+expressServer.headersTimeout = 31000;
