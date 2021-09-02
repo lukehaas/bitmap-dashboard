@@ -43,9 +43,9 @@ if (nodeEnv === 'development') {
   // );
 } else {
   // app.use(compression());
+  app.use(express.static('public'));
   app.use([/(.*)\.html$/, '/'], express.static('client/dist'));
 }
-// app.use(express.static('public'));
 
 app.get('/', (req, res) => {
   res.header('Content-Type', 'text/html');
@@ -62,6 +62,8 @@ app.get('/image', (req, res) => {
     .then(image => image.greyscale().getBufferAsync(Jimp.MIME_BMP))
     .then(image => {
       res.header('Content-Type', 'image/bmp');
+      res.header('Connection', 'Keep-Alive');
+      res.header('Keep-Alive', 'timeout=30, max=1000');
       res.send(image);
     })
     .catch(err => res.status(500).send(err));
