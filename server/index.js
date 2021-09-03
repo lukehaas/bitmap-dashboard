@@ -15,7 +15,6 @@ const { getImage } = require('./modules/scraper');
 const server = new ApolloServer({ typeDefs, resolvers });
 
 const app = express();
-app.use(helmet());
 
 const port = parseInt(process.env.PORT, 10) || 3000;
 const nodeEnv = process.env.NODE_ENV;
@@ -38,6 +37,7 @@ if (nodeEnv === 'development') {
   // );
 } else {
   // app.use(compression());
+  app.use(helmet());
   app.use(express.static('public'));
   app.use([/(.*)\.html$/, '/'], express.static('client/dist'));
 }

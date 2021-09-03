@@ -10,8 +10,8 @@ const List = styled.ul`
 `;
 
 const ListItem = styled.li`
-  font-size: 14px;
-  margin-bottom: 12px;
+  font-size: 20px;
+  margin-bottom: 16px;
 `;
 
 export const News = () => {
