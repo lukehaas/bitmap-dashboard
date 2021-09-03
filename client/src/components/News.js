@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 import styled from '@emotion/styled';
+import { slice } from 'lodash-es';
 
 import { NEWS } from 'data/queries';
 
@@ -21,7 +22,7 @@ export const News = () => {
   if (error) return <p>Error :(</p>;
   return (
     <List>
-      {data.news.map(({ title }, index) => (
+      {slice(data.news, 0, 6).map(({ title }, index) => (
         <ListItem key={`${index}${title.charAt(0)}`}>{title}</ListItem>
       ))}
     </List>
