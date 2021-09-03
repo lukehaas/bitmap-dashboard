@@ -8,7 +8,7 @@ const getImage = async () => {
   await page.goto(process.env.HOST, {
     waitUntil: 'networkidle2',
   });
-  await page.setViewport({ width: 880, height: 528, isLandscape: true });
+  await page.setViewport({ width: 800, height: 500, isLandscape: true });
   const image = await page.screenshot({ fullPage: true });
   await page.close();
   await browser.close();
