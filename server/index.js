@@ -14,13 +14,15 @@ const { getImage } = require('./modules/scraper');
 
 const server = new ApolloServer({ typeDefs, resolvers });
 
-const app = express();
-app.use(helmet());
-app.use(function (req, res, next) {
-  res.setHeader('Connection', 'Keep-Alive');
-  res.setHeader('Keep-Alive', 'timeout=30, max=1000');
+function requireHTTP(req, res, next) {
+  if (req.get('x-forwarded-proto') === 'https') {
+    res.redirect('http://' + req.hostname + req.url);
+    return;
+  }
   next();
-});
+}
+
+const app = express();
 
 const port = parseInt(process.env.PORT, 10) || 3000;
 const nodeEnv = process.env.NODE_ENV;
@@ -44,6 +46,7 @@ if (nodeEnv === 'development') {
 } else {
   // app.use(helmet());
   // app.use(compression());
+  app.use(requireHTTP);
   app.use(express.static('public'));
   app.use([/(.*)\.html$/, '/'], express.static('client/dist'));
 }
@@ -60,10 +63,7 @@ app.get('/image/:id', (req, res) => {
     .then(image => image.getBufferAsync(Jimp.MIME_BMP))
     .then(image => {
       res.header('Content-Type', 'image/bmp');
-      // res.end(image, 'binary');
-      res.header('Connection', 'Keep-Alive');
-      res.header('Keep-Alive', 'timeout=30, max=1000');
-      res.send(image);
+      res.end(image, 'binary');
     })
     .catch(err => res.status(500).send(err));
 });
