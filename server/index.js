@@ -36,20 +36,21 @@ if (nodeEnv === 'development') {
   //   })
   // );
 } else {
-  // app.use(compression());
   app.use(helmet());
+  app.use(compression());
   app.use(express.static('public'));
   app.use([/(.*)\.html$/, '/'], express.static('client/dist'));
 }
 
-app.get('/', (req, res) => {
+app.get('/:id', (req, res) => {
   res.header('Content-Type', 'text/html');
   res.sendFile(path.join(__dirname + '/../client/dist/index.html'));
 });
 
-app.get('/image', (req, res) => {
-  getImage()
+app.get('/image/:id', (req, res) => {
+  getImage(req.params.id)
     .then(image => Jimp.read(image))
+    .then(image => image.rotate(90))
     .then(image => image.getBufferAsync(Jimp.MIME_BMP))
     .then(image => {
       res.header('Content-Type', 'image/bmp');

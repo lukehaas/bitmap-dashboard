@@ -1,25 +1,15 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
-const OrientationWrapper = styled.main`
-  transform: rotate(90deg);
-  transform-origin: bottom left;
-  width: 100vh;
-  height: 100vw;
-  position: absolute;
-  top: -100vw;
-`;
-
-const StyledWrapper = styled.div`
-  padding: 8px;
+const StyledWrapper = styled.main`
+  padding: 16px 12px;
+  height: 100%;
+  position: relative;
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
 `;
 
 export const Wrapper = ({ children }) => {
-  return (
-    <OrientationWrapper>
-      <StyledWrapper>{children}</StyledWrapper>
-    </OrientationWrapper>
-  );
+  return <StyledWrapper>{children}</StyledWrapper>;
 };

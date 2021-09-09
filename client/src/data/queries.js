@@ -7,3 +7,25 @@ export const NEWS = gql`
     }
   }
 `;
+
+export const WORD_OF_DAY = gql`
+  query GetWordofDay {
+    wordOfDay {
+      word
+      type
+      pronunciation
+      definitions
+    }
+  }
+`;
+
+export const WEATHER = gql`
+  query GetWeather {
+    weather {
+      city
+      temp
+      icon
+      description
+    }
+  }
+`;

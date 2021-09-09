@@ -5,8 +5,24 @@ const typeDefs = gql`
     title: String
   }
 
+  type WordEntry {
+    word: String
+    type: String
+    pronunciation: String
+    definitions: [String]
+  }
+
+  type Weather {
+    city: String
+    temp: Float
+    icon: String
+    description: String
+  }
+
   type Query {
     news: [Article]
+    wordOfDay: WordEntry
+    weather: Weather
   }
 `;
 
