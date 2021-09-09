@@ -14,14 +14,6 @@ const { getImage } = require('./modules/scraper');
 
 const server = new ApolloServer({ typeDefs, resolvers });
 
-function requireHTTP(req, res, next) {
-  if (req.get('x-forwarded-proto') === 'https') {
-    res.redirect('http://' + req.hostname + req.url);
-    return;
-  }
-  next();
-}
-
 const app = express();
 
 const port = parseInt(process.env.PORT, 10) || 3000;
@@ -46,7 +38,6 @@ if (nodeEnv === 'development') {
 } else {
   // app.use(helmet());
   // app.use(compression());
-  app.use(requireHTTP);
   app.use(express.static('public'));
   app.use([/(.*)\.html$/, '/'], express.static('client/dist'));
 }
