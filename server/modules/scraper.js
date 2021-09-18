@@ -1,11 +1,11 @@
 const puppeteer = require('puppeteer');
 
-const getImage = async id => {
+const getImage = async (id, charge = 0) => {
   const browser = await puppeteer.launch({
     args: ['--no-sandbox', '--disable-setuid-sandbox'],
   });
   const page = await browser.newPage();
-  await page.goto(`${process.env.HOST}/${id}`, {
+  await page.goto(`${process.env.HOST}/${id}?charge=${charge}`, {
     waitUntil: 'networkidle2',
   });
   await page.setViewport({ width: 526, height: 878 });

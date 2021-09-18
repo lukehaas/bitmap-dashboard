@@ -2,6 +2,7 @@ import React from 'react';
 import { Global, css } from '@emotion/react';
 import { ApolloProvider } from '@apollo/client/react';
 import { ApolloClient, InMemoryCache } from '@apollo/client';
+import queryString from 'query-string';
 import './weather-icons.css';
 
 import { Wrapper } from 'components/Wrapper';
@@ -14,6 +15,13 @@ const client = new ApolloClient({
   uri: `${process.env.HOST}/graphql`,
   cache: new InMemoryCache(),
 });
+
+const getChargeLevel = () => {
+  if (!location) return 0;
+  const { charge } = queryString.parse(location.search);
+  if (charge) return charge;
+  return 0;
+};
 
 export default () => {
   return (
@@ -40,7 +48,7 @@ export default () => {
             }
           `}
         />
-        <Battery charge={10} />
+        <Battery charge={getChargeLevel()} />
         <Today />
         <Weather />
         <News />

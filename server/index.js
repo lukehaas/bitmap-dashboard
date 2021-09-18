@@ -36,8 +36,8 @@ if (nodeEnv === 'development') {
   //   })
   // );
 } else {
-  // app.use(helmet());
-  // app.use(compression());
+  app.use(helmet());
+  app.use(compression());
   app.use(express.static('public'));
   app.use([/(.*)\.html$/, '/'], express.static('client/dist'));
 }
@@ -48,7 +48,7 @@ app.get('/:id', (req, res) => {
 });
 
 app.get('/image/:id', (req, res) => {
-  getImage(req.params.id)
+  getImage(req.params.id, req.query.charge)
     .then(image => Jimp.read(image))
     .then(image => image.rotate(90))
     .then(image => image.getBufferAsync(Jimp.MIME_BMP))
