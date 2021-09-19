@@ -6,7 +6,7 @@ const getImage = async (id, charge = 0) => {
   });
   const page = await browser.newPage();
   await page.goto(`${process.env.HOST}/${id}?charge=${charge}`, {
-    waitUntil: 'networkidle2',
+    waitUntil: 'networkidle0',
   });
   await page.setViewport({ width: 526, height: 878 });
   const image = await page.screenshot({ fullPage: true });
