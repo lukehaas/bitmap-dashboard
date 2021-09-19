@@ -10,12 +10,13 @@ export const Battery = styled.div`
   width: 38px;
   &:before {
     content: '';
+    border-radius: 3px;
     position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
+    left: 1px;
+    top: 1px;
+    height: calc(100% - 2px);
     background-color: black;
-    width: ${props => `${props.charge}%`};
+    width: ${props => `calc(${props.charge}% - 2px)`};
   }
   &:after {
     content: '';
