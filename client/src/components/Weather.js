@@ -30,7 +30,7 @@ const Status = styled.p`
 `;
 
 const Temperature = styled.p`
-  font-size: 42px;
+  font-size: 41px;
   margin: 0 0 0 20px;
 `;
 // icons: https://erikflowers.github.io/weather-icons/

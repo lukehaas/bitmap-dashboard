@@ -3,11 +3,11 @@ import styled from '@emotion/styled';
 export const Battery = styled.div`
   border-radius: 3px;
   position: absolute;
-  top: 12px;
-  right: 12px;
+  top: 8px;
+  right: 8px;
   border: 2px solid black;
-  height: 18px;
-  width: 38px;
+  height: 15px;
+  width: 32px;
   &:before {
     content: '';
     border-radius: 3px;
