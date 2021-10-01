@@ -30,7 +30,7 @@ const resolvers = {
       const tweet = head(json.data);
 
       const word = tweet.text
-        .replace(searchTerm, '')
+        .replace(/(.*):/, '')
         .trim()
         .split(', ')[0]
         .trim()
