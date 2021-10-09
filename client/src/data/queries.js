@@ -29,3 +29,12 @@ export const WEATHER = gql`
     }
   }
 `;
+
+export const TWEET = gql`
+  query GetTweet {
+    tweet {
+      text
+      url
+    }
+  }
+`;

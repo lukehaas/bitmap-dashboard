@@ -9,7 +9,7 @@ import { Wrapper } from 'components/Wrapper';
 import { Today } from 'components/Today';
 import { News } from 'components/News';
 import { Word } from 'components/Word';
-import { Battery, Weather } from 'components';
+import { Battery, Weather, Tweet } from 'components';
 
 const client = new ApolloClient({
   uri: `${process.env.HOST}/graphql`,
@@ -53,6 +53,7 @@ export default () => {
         <Weather />
         <News />
         <Word />
+        {/* <Tweet /> */}
       </Wrapper>
     </ApolloProvider>
   );

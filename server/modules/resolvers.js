@@ -3,13 +3,23 @@ const get = require('lodash/get');
 
 const newsUrl = `https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=${process.env.news_key}`;
 
-const twitterUrl = 'https://api.twitter.com/2/tweets/search/recent';
+const twitterUrl = 'https://api.twitter.com/2/';
 
 const oedUrl = 'https://od-api.oxforddictionaries.com/';
 
 const weatherbitUrl = 'http://api.weatherbit.io/v2.0/';
 
-const searchTerm = 'OED Word of the Day:';
+const getTweets = async url => {
+  const response = await fetch(url, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: `Bearer ${process.env.twitter_bearer_token}`,
+    },
+  });
+  const json = await response.json();
+  return json;
+};
 
 const resolvers = {
   Query: {
@@ -19,23 +29,16 @@ const resolvers = {
       return articles;
     },
     wordOfDay: async () => {
-      const response = await fetch(`${twitterUrl}?query="${searchTerm}" from:oed`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          authorization: `Bearer ${process.env.twitter_bearer_token}`,
-        },
-      });
-      const json = await response.json();
-      const tweet = head(json.data);
-
+      const tweets = await getTweets(
+        `${twitterUrl}tweets/search/recent?query="OED Word of the Day:" from:oed`
+      );
+      const tweet = head(tweets.data);
       const word = tweet.text
         .replace(/(.*):/, '')
         .trim()
         .split(', ')[0]
         .trim()
         .toLowerCase();
-
       const oedResponse = await fetch(`${oedUrl}/api/v2/entries/en-gb/${word}`, {
         method: 'GET',
         headers: {
@@ -44,24 +47,32 @@ const resolvers = {
           app_key: process.env.dictionary_app_key,
         },
       });
-
       const oedJson = await oedResponse.json();
       // console.log('response', JSON.stringify(oedJson));
       const result = get(oedJson, 'results[0].lexicalEntries[0]');
-
       const type = get(result, 'lexicalCategory.text');
-
       const pronunciation = get(
         result,
         'entries[0].pronunciations[0].phoneticSpelling'
       );
       const definitions = get(result, 'entries[0].senses[0].definitions');
-
       return {
         word,
         type,
         pronunciation,
         definitions,
+      };
+    },
+    tweet: async () => {
+      const tweets = await getTweets(
+        `${twitterUrl}users/3290279687/tweets?expansions=attachments.media_keys&tweet.fields=attachments&media.fields=url,preview_image_url,media_key&max_results=5`
+      );
+      const tweet = head(tweets.data);
+      const media = head(tweets.includes.media);
+
+      return {
+        ...tweet,
+        url: get(media, 'url'),
       };
     },
     weather: async () => {

@@ -19,10 +19,16 @@ const typeDefs = gql`
     description: String
   }
 
+  type Tweet {
+    text: String
+    url: String
+  }
+
   type Query {
     news: [Article]
     wordOfDay: WordEntry
     weather: Weather
+    tweet: Tweet
   }
 `;
 
