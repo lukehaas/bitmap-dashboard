@@ -16,6 +16,7 @@ const deviceConfigurations = {
       componentIds.News,
       componentIds.Word,
     ],
+    orientation: 'portrait',
     dimensions: {
       width: 478,
       height: 798,
@@ -23,6 +24,7 @@ const deviceConfigurations = {
   },
   art: {
     components: [componentIds.Today, componentIds.Tweet],
+    orientation: 'landscape',
     dimensions: {
       width: 598,
       height: 446,

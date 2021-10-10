@@ -5,7 +5,6 @@ const express = require('express');
 const path = require('path');
 const compression = require('compression');
 const { ApolloServer } = require('apollo-server-express');
-const Jimp = require('jimp');
 const helmet = require('helmet');
 
 const resolvers = require('./modules/resolvers');
@@ -49,9 +48,6 @@ app.get('/:id', (req, res) => {
 
 app.get('/image/:id', (req, res) => {
   getImage(req.params.id, req.query.charge)
-    .then(image => Jimp.read(image))
-    .then(image => image.rotate(90))
-    .then(image => image.getBufferAsync(Jimp.MIME_BMP))
     .then(image => {
       res.header('Content-Type', 'image/bmp');
       res.end(image, 'binary');
