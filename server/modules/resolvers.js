@@ -1,6 +1,8 @@
 const head = require('lodash/head');
 const get = require('lodash/get');
 
+const { getConfig } = require('../config');
+
 const newsUrl = `https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=${process.env.news_key}`;
 
 const twitterUrl = 'https://api.twitter.com/2/';
@@ -94,6 +96,9 @@ const resolvers = {
         icon: get(result, 'weather.icon'),
         description: get(result, 'weather.description'),
       };
+    },
+    configuration: (_, { id }) => {
+      return getConfig(id);
     },
   },
 };

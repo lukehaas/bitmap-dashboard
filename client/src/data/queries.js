@@ -38,3 +38,11 @@ export const TWEET = gql`
     }
   }
 `;
+
+export const CONFIG = gql`
+  query GetConfiguration($id: ID!) {
+    configuration(id: $id) {
+      components
+    }
+  }
+`;

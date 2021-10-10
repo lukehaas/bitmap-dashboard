@@ -3,13 +3,12 @@ import { Global, css } from '@emotion/react';
 import { ApolloProvider } from '@apollo/client/react';
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 import queryString from 'query-string';
+import { last } from 'lodash-es';
 import './weather-icons.css';
 
 import { Wrapper } from 'components/Wrapper';
-import { Today } from 'components/Today';
-import { News } from 'components/News';
-import { Word } from 'components/Word';
-import { Battery, Weather, Tweet } from 'components';
+import { Dashboard } from 'components/Dashboard';
+import { Battery } from 'components';
 
 const client = new ApolloClient({
   uri: `${process.env.HOST}/graphql`,
@@ -18,9 +17,13 @@ const client = new ApolloClient({
 
 const getChargeLevel = () => {
   if (!location) return 0;
-  const { charge } = queryString.parse(location.search);
+  const { charge } = queryString.parse(window.location.search);
   if (charge) return charge;
   return 0;
+};
+
+const getId = () => {
+  return last(window.location.pathname.split('/'));
 };
 
 export default () => {
@@ -49,11 +52,7 @@ export default () => {
           `}
         />
         <Battery charge={getChargeLevel()} />
-        <Today />
-        <Weather />
-        <News />
-        <Word />
-        {/* <Tweet /> */}
+        <Dashboard id={getId()} />
       </Wrapper>
     </ApolloProvider>
   );

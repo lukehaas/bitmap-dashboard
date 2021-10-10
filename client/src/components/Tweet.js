@@ -5,9 +5,12 @@ import styled from '@emotion/styled';
 import { SmallP } from './Text';
 import { TWEET } from 'data/queries';
 
-const Img = styled.img`
-  width: 100%;
-  height: auto;
+const Picture = styled.div`
+  flex: 1;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: ${props => `url(${props.src});`};
 `;
 // https://twitter.com/APainting_ADay
 
@@ -18,9 +21,9 @@ export const Tweet = () => {
 
   const { text, url } = data.tweet;
   return (
-    <div>
+    <>
       {text && <SmallP>{text}</SmallP>}
-      {url && <Img src={data.tweet.url} />}
-    </div>
+      {url && <Picture src={data.tweet.url} />}
+    </>
   );
 };

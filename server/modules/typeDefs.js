@@ -24,11 +24,16 @@ const typeDefs = gql`
     url: String
   }
 
+  type Config {
+    components: [String]
+  }
+
   type Query {
     news: [Article]
     wordOfDay: WordEntry
     weather: Weather
     tweet: Tweet
+    configuration(id: ID!): Config
   }
 `;
 
