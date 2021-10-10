@@ -35,7 +35,11 @@ if (nodeEnv === 'development') {
   //   })
   // );
 } else {
-  app.use(helmet());
+  app.use(
+    helmet({
+      contentSecurityPolicy: false,
+    })
+  );
   // app.use(compression());
   app.use(express.static('public'));
   app.use([/(.*)\.html$/, '/'], express.static('client/dist'));
