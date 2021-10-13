@@ -26,7 +26,7 @@ if (nodeEnv === 'development') {
   // const webpackHotMiddleware = require('webpack-hot-middleware');
 
   const compiler = webpack(require('../webpack.dev.config'));
-
+  app.use(express.static('public'));
   app.use(webpackDevMiddleware(compiler));
 
   // app.use(

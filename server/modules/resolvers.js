@@ -36,8 +36,8 @@ const resolvers = {
       );
       const tweet = head(tweets.data);
       const word = tweet.text
-        .replace(/(.*):/, '')
-        .trim()
+        .replace(/^[^:]*/, '')
+        .replace(/:/, '')
         .split(', ')[0]
         .trim()
         .toLowerCase();
