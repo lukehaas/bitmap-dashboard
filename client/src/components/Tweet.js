@@ -14,6 +14,10 @@ const Picture = styled.div`
 `;
 // https://twitter.com/APainting_ADay
 
+const stripUrls = str => {
+  return str.replace(/(?:https?|ftp):\/\/[\n\S]+/g, '').replace(/(?:@)[\n\S]+/g, '');
+};
+
 export const Tweet = () => {
   const { loading, error, data } = useQuery(TWEET);
   if (loading) return <p>Loading...</p>;
@@ -22,7 +26,7 @@ export const Tweet = () => {
   const { text, url } = data.tweet;
   return (
     <>
-      {text && <SmallP>{text}</SmallP>}
+      {text && <SmallP>{stripUrls(text)}</SmallP>}
       {url && <Picture src={data.tweet.url} />}
     </>
   );
