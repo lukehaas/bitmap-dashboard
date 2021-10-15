@@ -26,7 +26,7 @@ export const Tweet = () => {
   const { text, url } = data.tweet;
   return (
     <>
-      {text && <SmallP>{stripUrls(text)}</SmallP>}
+      {/* {text && <SmallP>{stripUrls(text)}</SmallP>} */}
       {url && <Picture src={data.tweet.url} />}
     </>
   );
