@@ -14,7 +14,7 @@ const deviceConfigurations = {
     components: [
       componentIds.Today,
       componentIds.Weather,
-      componentIds.Custom,
+      componentIds.Tweet,
       // componentIds.News,
       // componentIds.Word,
     ],
@@ -23,7 +23,15 @@ const deviceConfigurations = {
       width: 478,
       height: 798,
     },
-    dithering: false,
+    dithering: {
+      dithKern: 'FloydSteinberg',
+      minHueCols: 256,
+      colors: 7,
+      palette: [
+        [0, 0, 0],
+        [255, 255, 255],
+      ],
+    },
   },
   art: {
     components: [componentIds.Today, componentIds.Tweet],

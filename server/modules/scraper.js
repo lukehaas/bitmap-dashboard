@@ -44,7 +44,7 @@ function drawPixels(idxi8, width0, width1) {
   ctx2.imageSmoothingEnabled = false;
 
   var imgd = ctx.createImageData(can.width, can.height);
-  console.log('type', typeOf(imgd.data));
+
   if (typeOf(imgd.data) == 'CanvasPixelArray') {
     var data = imgd.data;
     for (var i = 0, len = data.length; i < len; ++i) data[i] = idxi8[i];
