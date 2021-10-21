@@ -9,6 +9,7 @@ import { Weather } from './Weather';
 import { News } from './News';
 import { Word } from './Word';
 import { Tweet } from './Tweet';
+import { Custom } from './Custom';
 
 const componentIds = {
   Today: 'Today',
@@ -16,6 +17,7 @@ const componentIds = {
   News: 'News',
   Word: 'Word',
   Tweet: 'Tweet',
+  Custom: 'Custom',
 };
 
 const componentMap = {
@@ -24,6 +26,7 @@ const componentMap = {
   [componentIds.News]: () => <News key="news" />,
   [componentIds.Word]: () => <Word key="word" />,
   [componentIds.Tweet]: () => <Tweet key="tweet" />,
+  [componentIds.Custom]: () => <Custom key="custom" />,
 };
 
 export const Dashboard = ({ id }) => {

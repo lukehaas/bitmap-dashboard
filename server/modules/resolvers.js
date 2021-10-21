@@ -71,8 +71,6 @@ const resolvers = {
       const tweets = await getTweets(
         `${twitterUrl}users/3290279687/tweets?expansions=attachments.media_keys&tweet.fields=attachments&media.fields=url,preview_image_url,media_key&max_results=5`
       );
-      // console.log(tweets);
-      // console.log(tweets.includes.media);
       const tweet = head(tweets.data);
       const media = head(tweets.includes.media);
 
@@ -83,7 +81,7 @@ const resolvers = {
     },
     weather: async () => {
       const response = await fetch(
-        `${weatherbitUrl}/current?city=peterborough&country=uk&key=${process.env.weatherbit_api_key}`,
+        `${weatherbitUrl}/current?city=bexhill&country=uk&key=${process.env.weatherbit_api_key}`,
         {
           method: 'GET',
           headers: {

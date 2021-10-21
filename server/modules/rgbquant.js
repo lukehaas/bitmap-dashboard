@@ -863,6 +863,7 @@
         ctx = can.getContext('2d');
         ctx.drawImage(img, 0, 0);
       case 'Canvas':
+      case 'Object':
       case 'HTMLCanvasElement':
         can = can || img;
         ctx = ctx || can.getContext('2d');
