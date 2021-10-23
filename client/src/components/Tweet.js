@@ -30,7 +30,7 @@ export const Tweet = () => {
   return (
     <>
       {/* {text && <SmallP>{stripUrls(text)}</SmallP>} */}
-      {url && <Picture src={url} />}
+      {url && <Picture src="/plad.jpg" />}
     </>
   );
 };
