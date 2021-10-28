@@ -81,7 +81,7 @@ const resolvers = {
     },
     weather: async () => {
       const response = await fetch(
-        `${weatherbitUrl}/current?city=bexhill&country=uk&key=${process.env.weatherbit_api_key}`,
+        `${weatherbitUrl}/current?city=peterborough&country=uk&key=${process.env.weatherbit_api_key}`,
         {
           method: 'GET',
           headers: {

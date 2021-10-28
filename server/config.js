@@ -14,24 +14,15 @@ const deviceConfigurations = {
     components: [
       componentIds.Today,
       componentIds.Weather,
-      componentIds.Tweet,
-      // componentIds.News,
-      // componentIds.Word,
+      componentIds.News,
+      componentIds.Word,
     ],
     orientation: 'portrait',
     dimensions: {
       width: 478,
       height: 798,
     },
-    dithering: {
-      dithKern: 'FloydSteinberg',
-      minHueCols: 256,
-      colors: 2,
-      palette: [
-        [0, 0, 0],
-        [255, 255, 255],
-      ],
-    },
+    dithering: false,
   },
   art: {
     components: [componentIds.Today, componentIds.Tweet],
