@@ -19,8 +19,8 @@ const deviceConfigurations = {
     ],
     orientation: 'portrait',
     dimensions: {
-      width: 478,
-      height: 796,
+      width: 480,
+      height: 800,
     },
     dithering: false,
   },
