@@ -18,7 +18,9 @@ export const Word = () => {
     <Figure>
       <H2>{word}</H2>
       <figcaption>
-        {type && pronunciation && <SmallP>{`${type} ${pronunciation}`}</SmallP>}
+        {(type || pronunciation) && (
+          <SmallP>{`${type || ''} ${pronunciation || ''}`}</SmallP>
+        )}
         {definitions?.map((def, index) => (
           <P key={`${index}def`}>{def}</P>
         ))}

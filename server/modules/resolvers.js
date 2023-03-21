@@ -41,7 +41,7 @@ const resolvers = {
         .split(', ')[0]
         .trim()
         .toLowerCase();
-      const oedResponse = await fetch(`${oedUrl}/api/v2/entries/en-gb/${word}`, {
+      const oedResponse = await fetch(`${oedUrl}api/v2/entries/en-gb/${word}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
