@@ -12,6 +12,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "engines": {
+    "node": "16.13.0"
+  },
   "devDependencies": {
     "@apollo/client": "3.3.14",
     "@babel/core": "7.13.8",
