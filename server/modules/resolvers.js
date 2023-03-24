@@ -68,8 +68,9 @@ const resolvers = {
     tweet: async () => {
       // Pixel_Dailies -> 2586535099
       // APainting_ADay -> 3290279687
+      // dailypaintings -> 2596618856
       const tweets = await getTweets(
-        `${twitterUrl}users/3290279687/tweets?expansions=attachments.media_keys&tweet.fields=attachments&media.fields=url,preview_image_url,media_key&max_results=5`
+        `${twitterUrl}users/2596618856/tweets?expansions=attachments.media_keys&tweet.fields=attachments&media.fields=url,preview_image_url,media_key&max_results=5`
       );
       const tweet = head(tweets.data);
       const media = head(tweets.includes.media);

@@ -27,3 +27,8 @@ export const SmallP = styled.p`
   font-size: 17px;
   margin: 0 0 12px 0;
 `;
+
+export const Caption = styled.p`
+  font-size: 17px;
+  margin: 5px 0 0 0;
+`;

@@ -93,7 +93,7 @@ const getImage = async (id, charge = 0) => {
       if (orientation === 'portrait') {
         return image.resize(dimensions.height, dimensions.width);
       }
-      image.resize(dimensions.width, dimensions.height);
+      return image.resize(dimensions.width, dimensions.height);
     })
     .then(image => image.getBufferAsync(Jimp.MIME_BMP));
 };

@@ -25,7 +25,7 @@ const deviceConfigurations = {
     dithering: false,
   },
   art: {
-    components: [componentIds.Today, componentIds.Tweet],
+    components: [componentIds.Tweet],
     orientation: 'landscape',
     dimensions: {
       width: 598,

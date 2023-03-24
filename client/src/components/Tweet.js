@@ -2,7 +2,7 @@ import React from 'react';
 import { useQuery } from '@apollo/client';
 import styled from '@emotion/styled';
 
-import { SmallP } from './Text';
+import { Caption } from './Text';
 import { TWEET } from 'data/queries';
 
 const Picture = styled.div`
@@ -14,6 +14,7 @@ const Picture = styled.div`
   filter: brightness(1.2) saturate(1.3) contrast(1.2);
 `;
 // https://twitter.com/APainting_ADay
+// https://twitter.com/dailypaintings
 
 const stripUrls = str => {
   return str.replace(/(?:https?|ftp):\/\/[\n\S]+/g, '').replace(/(?:@)[\n\S]+/g, '');
@@ -26,11 +27,14 @@ export const Tweet = () => {
   if (error) return <p>Error :(</p>;
 
   const { text, url } = data.tweet;
+  const description = stripUrls(text).split(',').slice(0, 3).join(',');
 
   return (
     <>
-      {/* {text && <SmallP>{stripUrls(text)}</SmallP>} */}
       {url && <Picture src="/plad.jpg" />}
+      {description && <Caption>Little Paul, Oil on Canvas.</Caption>}
+      {/* {url && <Picture src={url} />} */}
+      {/* {description && <Caption>{description}</Caption>} */}
     </>
   );
 };
