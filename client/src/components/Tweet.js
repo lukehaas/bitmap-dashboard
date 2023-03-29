@@ -14,7 +14,6 @@ const Picture = styled.div`
   filter: brightness(1.2) saturate(1.3) contrast(1.2);
 `;
 // https://twitter.com/APainting_ADay
-// https://twitter.com/dailypaintings
 
 const stripUrls = str => {
   return str.replace(/(?:https?|ftp):\/\/[\n\S]+/g, '').replace(/(?:@)[\n\S]+/g, '');
