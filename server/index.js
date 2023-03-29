@@ -6,10 +6,17 @@ const path = require('path');
 const compression = require('compression');
 const { ApolloServer } = require('apollo-server-express');
 const helmet = require('helmet');
+const memjs = require('memjs');
 
 const resolvers = require('./modules/resolvers');
 const typeDefs = require('./modules/typeDefs');
 const { getImage } = require('./modules/scraper');
+
+const mc = memjs.Client.create(process.env.MEMCACHIER_SERVERS, {
+  failover: true, // default: false
+  timeout: 1, // default: 0.5 (seconds)
+  keepAlive: true, // default: false
+});
 
 const server = new ApolloServer({ typeDefs, resolvers });
 
@@ -51,12 +58,24 @@ app.get('/:id', (req, res) => {
 });
 
 app.get('/image/:id', (req, res) => {
-  getImage(req.params.id, req.query.charge)
-    .then(image => {
+  const cacheKey = `image_${req.params.id}_${req.query.charge}`;
+  mc.get(cacheKey, function (err, val) {
+    if (err == null && val != null) {
+      // Found it!
       res.header('Content-Type', 'image/bmp');
-      res.end(image, 'binary');
-    })
-    .catch(err => res.status(500).send(err));
+      res.end(val, 'binary');
+    } else {
+      getImage(req.params.id, req.query.charge)
+        .then(image => {
+          mc.set(cacheKey, image, { expires: 600 }, function (err, val) {
+            console.log(err);
+          });
+          res.header('Content-Type', 'image/bmp');
+          res.end(image, 'binary');
+        })
+        .catch(err => res.status(500).send(err));
+    }
+  });
 });
 
 app.listen({ port }, () => {
