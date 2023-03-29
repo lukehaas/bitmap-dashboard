@@ -31,10 +31,10 @@ export const Tweet = () => {
 
   return (
     <>
-      {url && <Picture src="/plad.jpg" />}
-      {description && <Caption>Little Paul, Oil on Canvas.</Caption>}
-      {/* {url && <Picture src={url} />} */}
-      {/* {description && <Caption>{description}</Caption>} */}
+      {/* {url && <Picture src="/plad.jpg" />}
+      {description && <Caption>Little Paul, Oil on Canvas.</Caption>} */}
+      {url && <Picture src={url} />}
+      {description && <Caption>{description}</Caption>}
     </>
   );
 };
