@@ -11,7 +11,7 @@ const Picture = styled.div`
   background-repeat: no-repeat;
   background-position: center;
   background-image: ${props => `url(${props.src});`};
-  filter: brightness(1.2) saturate(1.3) contrast(1.2);
+  filter: brightness(1.1) saturate(1) contrast(1.5);
 `;
 // https://twitter.com/APainting_ADay
 
@@ -30,8 +30,7 @@ export const Tweet = () => {
 
   return (
     <>
-      {/* {url && <Picture src="/plad.jpg" />}
-      {description && <Caption>Little Paul, Oil on Canvas.</Caption>} */}
+      {/* {url && <Picture src="/plad.jpg" />} */}
       {url && <Picture src={url} />}
       {description && <Caption>{description}</Caption>}
     </>

@@ -33,8 +33,9 @@ const deviceConfigurations = {
     },
     dithering: {
       dithKern: 'FloydSteinberg',
-      minHueCols: 256,
+      minHueCols: 4096,
       colors: 7,
+      boxSize: [200, 200],
       palette: [
         [0, 0, 0],
         [255, 255, 255],
