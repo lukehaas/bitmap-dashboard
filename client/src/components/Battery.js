@@ -15,7 +15,7 @@ export const Battery = styled.div`
     left: 1px;
     top: 1px;
     height: calc(100% - 2px);
-    background-color: black;
+    background-color: ${props => (props.charge < 10 ? 'red' : 'green')};
     width: ${props => `calc(${props.charge}% - 2px)`};
   }
   &:after {
