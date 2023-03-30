@@ -29,6 +29,6 @@ export const SmallP = styled.p`
 `;
 
 export const Caption = styled.p`
-  font-size: 15px;
+  font-size: 14px;
   margin: 6px 0 0 0;
 `;
