@@ -31,15 +31,16 @@ const resolvers = {
       return articles;
     },
     wordOfDay: async () => {
+      const queryStr = encodeURIComponent('OED #WordoftheDay:');
       const tweets = await getTweets(
-        `${twitterUrl}tweets/search/recent?query="OED Word of the Day:" from:oed`
+        `${twitterUrl}tweets/search/recent?query="${queryStr}" from:oed`
       );
       const tweet = head(tweets.data);
       const word = tweet.text
         .replace(/^[^:]*/, '')
         .replace(/:/, '')
-        .split(', ')[0]
         .trim()
+        .split(/[^A-Za-z]/)[0]
         .toLowerCase();
       const oedResponse = await fetch(`${oedUrl}api/v2/entries/en-gb/${word}`, {
         method: 'GET',
