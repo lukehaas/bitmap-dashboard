@@ -5,7 +5,7 @@ const { getConfig } = require('../config');
 
 const newsUrl = `https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=${process.env.news_key}`;
 
-const twitterUrl = 'https://api.twitter.com/2/';
+const twitterUrl = 'https://api.twitter.com/1.1/';
 
 const oedUrl = 'https://od-api.oxforddictionaries.com/';
 
@@ -33,9 +33,9 @@ const resolvers = {
     wordOfDay: async () => {
       const queryStr = encodeURIComponent('OED #WordoftheDay:');
       const tweets = await getTweets(
-        `${twitterUrl}tweets/search/recent?query="${queryStr}" from:oed`
+        `${twitterUrl}search/tweets.json?q="${queryStr}" from:oed`
       );
-      const tweet = head(tweets.data);
+      const tweet = head(tweets?.statuses);
       const word = tweet.text
         .replace(/^[^:]*/, '')
         .replace(/:/, '')
@@ -69,15 +69,18 @@ const resolvers = {
     tweet: async () => {
       // Pixel_Dailies -> 2586535099
       // APainting_ADay -> 3290279687
+      // const tweets = await getTweets(
+      //   `${twitterUrl}users/3290279687/tweets?expansions=attachments.media_keys&tweet.fields=attachments&media.fields=url,preview_image_url,media_key&max_results=5`
+      // );
       const tweets = await getTweets(
-        `${twitterUrl}users/3290279687/tweets?expansions=attachments.media_keys&tweet.fields=attachments&media.fields=url,preview_image_url,media_key&max_results=5`
+        `${twitterUrl}statuses/user_timeline.json?screen_name=APainting_ADay&count=1&include_entities=true&tweet_mode=extended`
       );
-      const tweet = head(tweets.data);
-      const media = head(tweets.includes.media);
+      const tweet = head(tweets);
+      const media = tweet?.entities?.media[0];
 
       return {
-        ...tweet,
-        url: get(media, 'url') || get(media, 'preview_image_url'),
+        text: tweet?.full_text,
+        url: media?.media_url_https,
       };
     },
     weather: async () => {
