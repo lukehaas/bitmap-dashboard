@@ -11,12 +11,7 @@ const componentIds = {
 
 const deviceConfigurations = {
   one: {
-    components: [
-      componentIds.Today,
-      componentIds.Weather,
-      componentIds.News,
-      componentIds.Word,
-    ],
+    components: [componentIds.Today, componentIds.Weather, componentIds.News],
     orientation: 'portrait',
     dimensions: {
       width: 480,
