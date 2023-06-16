@@ -9,6 +9,7 @@ import { Weather } from './Weather';
 import { News } from './News';
 import { Word } from './Word';
 import { Tweet } from './Tweet';
+import { Art } from './Art';
 import { Custom } from './Custom';
 
 const componentIds = {
@@ -17,6 +18,7 @@ const componentIds = {
   News: 'News',
   Word: 'Word',
   Tweet: 'Tweet',
+  Art: 'Art',
   Custom: 'Custom',
 };
 
@@ -26,6 +28,7 @@ const componentMap = {
   [componentIds.News]: () => <News key="news" />,
   [componentIds.Word]: () => <Word key="word" />,
   [componentIds.Tweet]: () => <Tweet key="tweet" />,
+  [componentIds.Art]: () => <Art key="art" />,
   [componentIds.Custom]: () => <Custom key="custom" />,
 };
 

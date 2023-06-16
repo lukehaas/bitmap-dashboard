@@ -11,6 +11,8 @@ const oedUrl = 'https://od-api.oxforddictionaries.com/';
 
 const weatherbitUrl = 'http://api.weatherbit.io/v2.0/';
 
+const instagramUrl = 'https://instagram-scraper-2022.p.rapidapi.com/ig/posts/';
+
 const getTweets = async url => {
   const response = await fetch(url, {
     method: 'GET',
@@ -81,6 +83,38 @@ const resolvers = {
       return {
         text: tweet?.full_text,
         url: media?.media_url_https,
+      };
+    },
+    art: async () => {
+      const options = {
+        method: 'GET',
+        headers: {
+          'X-RapidAPI-Key': process.env.rapid_api_key,
+          'X-RapidAPI-Host': process.env.rapid_api_host_instagram,
+        },
+      };
+      // a_painting_a_day_
+      const response = await fetch(`${instagramUrl}?id_user=2164355771`, options);
+      const json = await response.json();
+      const result = get(
+        json,
+        'data.user.edge_owner_to_timeline_media.edges[0].node'
+      );
+
+      const text = get(result, 'edge_media_to_caption.edges[0].node.text');
+
+      const mediaResponse = await fetch(
+        `https://instagram-scraper-2022.p.rapidapi.com/ig/noCORS/?url_media=${encodeURIComponent(
+          result?.display_url
+        )}`,
+        options
+      );
+
+      const mediaJson = await mediaResponse.json();
+
+      return {
+        text: text,
+        url: mediaJson?.image?.shrt,
       };
     },
     weather: async () => {

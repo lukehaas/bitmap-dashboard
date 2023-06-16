@@ -39,6 +39,15 @@ export const TWEET = gql`
   }
 `;
 
+export const ART = gql`
+  query GetArt {
+    art {
+      text
+      url
+    }
+  }
+`;
+
 export const CONFIG = gql`
   query GetConfiguration($id: ID!) {
     configuration(id: $id) {

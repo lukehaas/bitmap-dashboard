@@ -33,7 +33,13 @@ const typeDefs = gql`
     wordOfDay: WordEntry
     weather: Weather
     tweet: Tweet
+    art: Art
     configuration(id: ID!): Config
+  }
+
+  type Art {
+    text: String
+    url: String
   }
 `;
 

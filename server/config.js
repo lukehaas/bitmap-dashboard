@@ -6,6 +6,7 @@ const componentIds = {
   News: 'News',
   Word: 'Word',
   Tweet: 'Tweet',
+  Art: 'Art',
   Custom: 'Custom',
 };
 
@@ -20,7 +21,7 @@ const deviceConfigurations = {
     dithering: false,
   },
   art: {
-    components: [componentIds.Tweet],
+    components: [componentIds.Art],
     orientation: 'landscape',
     dimensions: {
       width: 598,
