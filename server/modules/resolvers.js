@@ -1,5 +1,7 @@
 const head = require('lodash/head');
 const get = require('lodash/get');
+const fs = require('fs');
+const path = require('path');
 
 const { getConfig } = require('../config');
 
@@ -100,21 +102,25 @@ const resolvers = {
         json,
         'data.user.edge_owner_to_timeline_media.edges[0].node'
       );
+      const text = get(result, 'edge_media_to_caption.edges[0].node.text', '');
 
-      const text = get(result, 'edge_media_to_caption.edges[0].node.text');
+      const image = await fetch(result?.display_url);
 
-      const mediaResponse = await fetch(
-        `https://instagram-scraper-2022.p.rapidapi.com/ig/noCORS/?url_media=${encodeURIComponent(
-          result?.display_url
-        )}`,
-        options
+      const imageFilename = 'image.jpg';
+      const imageBuff = await image.arrayBuffer();
+
+      fs.writeFile(
+        path.join(__dirname, '../../public/', imageFilename),
+        Buffer.from(imageBuff),
+        err => {
+          if (err) throw err;
+          console.log('Image downloaded successfully!');
+        }
       );
-
-      const mediaJson = await mediaResponse.json();
 
       return {
         text: text,
-        url: mediaJson?.image?.shrt,
+        url: `/${imageFilename}`,
       };
     },
     weather: async () => {

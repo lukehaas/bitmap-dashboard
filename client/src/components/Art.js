@@ -16,6 +16,7 @@ const Picture = styled.div`
 // https://twitter.com/APainting_ADay
 
 const stripUrls = str => {
+  if (!str) return '';
   return str.replace(/(?:https?|ftp):\/\/[\n\S]+/g, '').replace(/(?:@)[\n\S]+/g, '');
 };
 
