@@ -98,4 +98,46 @@ const getImage = async (id, charge = 0) => {
     .then(image => image.getBufferAsync(Jimp.MIME_BMP));
 };
 
-module.exports.getImage = getImage;
+const getWordOfDay = async () => {
+  const url = 'https://www.merriam-webster.com/word-of-the-day';
+  const browser = await puppeteer.launch({
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+  });
+  const page = await browser.newPage();
+  await page.goto(url);
+  await page.setViewport({
+    width: 1200,
+    height: 800,
+  });
+  const $word = await page.$('.word-header-txt');
+  const $definition = await page.$$('.wod-definition-container > p');
+  $definition.pop();
+  const $type = await page.$('.main-attr');
+  const $pronunciation = await page.$('.word-syllables');
+  const $etymology = await page.$$('.did-you-know-wrapper > p');
+  const word = await page.evaluate($el => $el.textContent, $word);
+  const definitions = [];
+  for await ($el of $definition) {
+    const def = await page.evaluate($el => $el.textContent, $el);
+    definitions.push(def);
+  }
+  const etymology = [];
+  const type = await page.evaluate($el => $el.textContent, $type);
+  const pronunciation = await page.evaluate($el => $el.textContent, $pronunciation);
+  for await ($el of $etymology) {
+    const def = await page.evaluate($el => $el.textContent, $el);
+    etymology.push(def);
+  }
+  return {
+    word,
+    type,
+    pronunciation,
+    definitions,
+    etymology,
+  };
+};
+
+module.exports = {
+  getImage,
+  getWordOfDay,
+};

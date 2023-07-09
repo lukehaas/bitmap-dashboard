@@ -10,6 +10,7 @@ const typeDefs = gql`
     type: String
     pronunciation: String
     definitions: [String]
+    etymology: [String]
   }
 
   type Weather {

@@ -15,6 +15,7 @@ export const WORD_OF_DAY = gql`
       type
       pronunciation
       definitions
+      etymology
     }
   }
 `;

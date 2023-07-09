@@ -43,6 +43,15 @@ const deviceConfigurations = {
       ],
     },
   },
+  word: {
+    components: [componentIds.Word],
+    orientation: 'portrait',
+    dimensions: {
+      width: 480,
+      height: 800,
+    },
+    dithering: false,
+  },
 };
 
 const getConfig = id => {

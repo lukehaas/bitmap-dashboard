@@ -3,13 +3,12 @@ const get = require('lodash/get');
 const fs = require('fs');
 const path = require('path');
 
+const { getWordOfDay } = require('./scraper');
 const { getConfig } = require('../config');
 
 const newsUrl = `https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=${process.env.news_key}`;
 
 const twitterUrl = 'https://api.twitter.com/1.1/';
-
-const oedUrl = 'https://od-api.oxforddictionaries.com/';
 
 const weatherbitUrl = 'http://api.weatherbit.io/v2.0/';
 
@@ -35,40 +34,8 @@ const resolvers = {
       return articles;
     },
     wordOfDay: async () => {
-      const queryStr = encodeURIComponent('OED #WordoftheDay:');
-      const tweets = await getTweets(
-        `${twitterUrl}search/tweets.json?q="${queryStr}" from:oed`
-      );
-      const tweet = head(tweets?.statuses);
-      const word = tweet.text
-        .replace(/^[^:]*/, '')
-        .replace(/:/, '')
-        .trim()
-        .split(/[^A-Za-z]/)[0]
-        .toLowerCase();
-      const oedResponse = await fetch(`${oedUrl}api/v2/entries/en-gb/${word}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          app_id: process.env.dictionary_app_id,
-          app_key: process.env.dictionary_app_key,
-        },
-      });
-      const oedJson = await oedResponse.json();
-      // console.log('response', JSON.stringify(oedJson));
-      const result = get(oedJson, 'results[0].lexicalEntries[0]');
-      const type = get(result, 'lexicalCategory.text');
-      const pronunciation = get(
-        result,
-        'entries[0].pronunciations[0].phoneticSpelling'
-      );
-      const definitions = get(result, 'entries[0].senses[0].definitions');
-      return {
-        word,
-        type,
-        pronunciation,
-        definitions,
-      };
+      const result = await getWordOfDay();
+      return result;
     },
     tweet: async () => {
       // Pixel_Dailies -> 2586535099
