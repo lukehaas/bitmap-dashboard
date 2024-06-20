@@ -103,6 +103,10 @@ const resolvers = {
       const json = await response.json();
       const result = get(json, 'data[0]');
 
+      if (!result) {
+        throw new Error('error');
+      }
+
       return {
         city: get(result, 'city_name'),
         temp: get(result, 'temp'),
