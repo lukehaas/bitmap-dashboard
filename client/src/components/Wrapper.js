@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 const StyledWrapper = styled.main`
-  padding: 16px 12px;
+  padding: 24px 12px 16px 12px;
   height: 100%;
   position: relative;
   display: flex;

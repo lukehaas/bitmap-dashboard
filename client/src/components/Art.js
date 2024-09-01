@@ -7,7 +7,7 @@ import { ART } from 'data/queries';
 
 const Picture = styled.div`
   flex: 1;
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   background-image: ${props => `url(${props.src});`};
