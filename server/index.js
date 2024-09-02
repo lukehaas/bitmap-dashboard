@@ -57,15 +57,23 @@ app.get('/:id', (req, res) => {
   res.sendFile(path.join(__dirname + '/../client/dist/index.html'));
 });
 
+const getRandomConfig = () => {
+  const configs = ['artbw', 'one'];
+  const rand = Math.floor(Math.random() * configs.length);
+
+  return configs[rand];
+};
+
 app.get('/image/:id', (req, res) => {
-  const cacheKey = `image_${req.params.id}_${req.query.charge}`;
+  const id = req.params.id === 'one' ? getRandomConfig() : req.params.id;
+  const cacheKey = `image_${id}_${req.query.charge}`;
   mc.get(cacheKey, function (err, val) {
     if (err == null && val != null) {
       // Found it!
       res.header('Content-Type', 'image/bmp');
       res.end(val, 'binary');
     } else {
-      getImage(req.params.id, req.query.charge)
+      getImage(id, req.query.charge)
         .then(image => {
           mc.set(cacheKey, image, { expires: 600 }, function (err, val) {
             console.log(err);

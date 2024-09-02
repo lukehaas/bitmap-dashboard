@@ -20,6 +20,24 @@ const deviceConfigurations = {
     },
     dithering: false,
   },
+  artbw: {
+    components: [componentIds.Art],
+    orientation: 'portrait',
+    dimensions: {
+      width: 480,
+      height: 800,
+    },
+    dithering: {
+      dithKern: 'FloydSteinberg',
+      minHueCols: 4096,
+      colors: 2,
+      boxSize: [200, 200],
+      palette: [
+        [0, 0, 0],
+        [255, 255, 255],
+      ],
+    },
+  },
   art: {
     components: [componentIds.Art],
     orientation: 'landscape',
