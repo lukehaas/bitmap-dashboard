@@ -58,6 +58,7 @@ app.get('/:id', (req, res) => {
 });
 
 const getRandomConfig = () => {
+  return 'one';
   const configs = ['artbw', 'one'];
   const rand = Math.floor(Math.random() * configs.length);
 
