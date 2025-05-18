@@ -1,5 +1,5 @@
 # Use official Node.js LTS image
-FROM node:23-alpine
+FROM node:20-alpine
 
 RUN apk add --no-cache \
   chromium \
