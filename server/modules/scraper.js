@@ -1,6 +1,6 @@
 const puppeteer = require('puppeteer');
 const Jimp = require('jimp');
-const { createCanvas, Image } = require('canvas');
+const { Canvas, Image } = require('skia-canvas');
 const RgbQuant = require('./rgbquant');
 
 const { getConfig } = require('../config');
@@ -30,8 +30,8 @@ function drawPixels(idxi8, width0, width1) {
 
   width1 = width1 || width0;
 
-  var can = createCanvas(),
-    can2 = createCanvas(),
+  var can = new Canvas(),
+    can2 = new Canvas(),
     ctx = can.getContext('2d'),
     ctx2 = can2.getContext('2d');
 
@@ -65,7 +65,7 @@ const getImage = async (id, charge = 0) => {
   return generateImage({ id, charge, dimensions })
     .then(image => {
       if (!dithering) return image;
-      const canvas = createCanvas(dimensions.width, dimensions.height);
+      const canvas = new Canvas(dimensions.width, dimensions.height);
       const ctx = canvas.getContext('2d');
 
       img = new Image();

@@ -2,6 +2,7 @@
 FROM node:20-alpine
 
 RUN apk add --no-cache \
+  fontconfig \
   chromium \
   nss \
   freetype \
