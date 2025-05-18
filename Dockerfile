@@ -1,6 +1,16 @@
 # Use official Node.js LTS image
 FROM node:23-alpine
 
+RUN apk add --no-cache \
+  chromium \
+  nss \
+  freetype \
+  harfbuzz \
+  ca-certificates \
+  ttf-freefont
+
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
+
 # Set working directory
 WORKDIR /app
 
