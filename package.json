@@ -13,7 +13,7 @@
   "author": "",
   "license": "ISC",
   "engines": {
-    "node": "20.x"
+    "node": "16.13.0"
   },
   "devDependencies": {
     "@apollo/client": "3.3.14",
